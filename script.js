@@ -16,22 +16,40 @@ const goldText = document.querySelector("#goldText");
 const monsterStats = document.querySelector("#monsterStats");
 const monsterNameText = document.querySelector("#monsterName");
 const monsterHealthText = document.querySelector("#monsterHealth");
+const locations = [
+    {
+        name: "Town square",
+        "button text": [ "Go to store", "Go to cave", "Fight dragon"],
+        "button functions": [goStore, goCave, fightDragon],
+        text: "You are now back in the town square, bask in the warmth of the sunlight that shines into the square and decide your next move."
+    },
+    {
+        name: "Store",
+        "button text": [ "Buy 10 health (10 gold)", "Buy weapon (30 gold)", "Go back to town square"],
+        "button functions": [buyHealth, buyWeapon, goTown],
+        text: "You have entered the store. Gander at the wares the vendor intends to sell and see what takes your fancy!"
+    },
+];
 
 // initialise buttons
 button1.onclick = goStore;
 button2.onclick = goCave;
 button3.onclick = fightDragon;
 
+function update(location) {
+    button1.innerText = location["button text"][0];
+    button2.innerText = location["button text"][1];
+    button3.innerText = location["button text"][2];
+
+    button1.onclick = location["button funtion"][0];
+    button2.onclick = location["button function"][1];
+    button3.onclick = location["button function"][2];
+
+    text.innerText = location["text"];
+}
+
 function goStore() {
-    button1.innerText = "Buy 10 health (10 gold)";
-    button2.innerText = "Buy weapon (30 gold)";
-    button3.innerText = "Go back to town square";
-
-    button1.onclick = buyHealth;
-    button2.onclick = buyWeapon;
-    button3.onclick = goTown;
-
-    text.innerText = "You have entered the store. Gander at the wares the vendor intends to sell and see what takes your fancy!";
+    update(locations[1]);
 }
 
 function goCave() {
@@ -51,14 +69,5 @@ function buyWeapon() {
 }
 
 function goTown() {
-    button1.innerText = "Go to store";
-    button2.innerText = "Go to cave";
-    button3.innerText = "Fight dragon";
-
-    button1.onclick = goStore;
-    button2.onclick = goCave;
-    button3.onclick = fightDragon;
-
-    text.innerText = "You are now back in the town square, bask in the warmth of the sunlight that shines into the square and decide your next move.";
-
+    update(locations[0]);
 }
