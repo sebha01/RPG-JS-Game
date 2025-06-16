@@ -16,6 +16,8 @@ const goldText = document.querySelector("#goldText");
 const monsterStats = document.querySelector("#monsterStats");
 const monsterNameText = document.querySelector("#monsterName");
 const monsterHealthText = document.querySelector("#monsterHealth");
+
+//array of location data
 const locations = [
     {
         name: "Town square",
@@ -31,6 +33,46 @@ const locations = [
     },
 ];
 
+//array of weapon data
+const weapons = [
+    {
+        name: "stick",
+        power: 5
+    },
+    {
+        name: "dagger",
+        power: 15
+    },
+    {
+        name: "wooden sword",
+        power: 10
+    },
+    {
+        name: "iron sword",
+        power: 20
+    },
+    {
+        name: "steel sword",
+        power: 27
+    },
+    {
+        name: "adamantine sword",
+        power: 45
+    },
+    {
+        name: "wooden staff",
+        power: 12
+    },
+    {
+        name: "club",
+        power: 13
+    },
+    {
+        name: "spiked club",
+        power: 18
+    },
+]
+
 // initialise buttons
 button1.onclick = goStore;
 button2.onclick = goCave;
@@ -41,11 +83,11 @@ function update(location) {
     button2.innerText = location["button text"][1];
     button3.innerText = location["button text"][2];
 
-    button1.onclick = location["button funtion"][0];
-    button2.onclick = location["button function"][1];
-    button3.onclick = location["button function"][2];
+    button1.onclick = location["button functions"][0];
+    button2.onclick = location["button functions"][1];
+    button3.onclick = location["button functions"][2];
 
-    text.innerText = location["text"];
+    text.innerText = location.text;
 }
 
 function goStore() {
@@ -61,11 +103,27 @@ function fightDragon() {
 }
 
 function buyHealth() {
-
+    if (gold >= 10) {
+        gold -= 10;
+        health += 10;
+        goldText.innerText = gold;
+        healthText.innerText = health;
+    }
+    else {
+        text.innerText = "You do not have enough gold to buy more health."
+    }
+    
 }
 
 function buyWeapon() {
-
+    if (gold >= 30) {
+        gold -= 30;
+    
+        goldText.innerText = gold;
+    }
+    else {
+        text.innerText = "You do not have enough gold to buy a weapon."
+    }
 }
 
 function goTown() {
